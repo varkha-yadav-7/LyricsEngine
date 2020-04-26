@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Lyrics Search Engine</title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{%static 'homepage/basic.css'%}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    </head>
+    <body>
+        
+        <div class="container-fluid" style="background-color: teal;color: wheat;">
+            <h1 style="text-align: center;">Search your favorite song lyrics here</h1>
+            <h2>By song name or artist</h2>
+            <p><br></p>
+        </div>
+        <p><br></p>
+        <div class="blurry">
+            <p><br></p>
+            <h4 style="color: white;">Search Tracks of your favorite arists</h4>
+            <form action="searchTopTracks/" method="POST">{% csrf_token %}
+                <input style="font-size: larger;" type="text" placeholder="Enter song" name="artist" required>
+                <input style="border: transparent; background-color: black; font-size: larger; color: blanchedalmond;" type="submit" value="Search">
+            </form>
+            <h3 style="color: white;">OR</h3> -->
+           <h4 style="color: white;">Search Artist</h4>
+            <form action="searchArtist/" method="POST">{% csrf_token %}
+                <input style="font-size: larger;" type="text" placeholder="Enter Artist" name="artist" required>
+                <input style="border: transparent; background-color: black; font-size: larger; color: blanchedalmond;" type="submit" value="Search">
+            </form>
+            <h3 style="color: white;">OR</h3>
+            <h4 style="color: white;">Go for the lyrics directly</h4> 
+            <form action="searchSpecificSong/" method="POST">{% csrf_token %}
+                <input style="font-size: larger;" type="text" placeholder="Enter Song" name="song" required>
+                <input style="font-size: larger;" type="text" placeholder="Enter Artist" name="artist" required>
+                <input style="border: transparent; background-color: black; font-size: larger; color: blanchedalmond;" type="submit" value="Search">
+            </form>
+        </div>
+    </body>
+</html>
