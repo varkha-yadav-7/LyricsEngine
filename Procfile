@@ -1,0 +1,1 @@
+web:gunicorn lyricsengine.wsgi --log-file--
