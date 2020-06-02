@@ -33,15 +33,36 @@ def search(request):
     a=[]
     for i in soup.find_all('a'):
         dict={}
-        dict['link']='https://www.lyricsmint.com'+i['href']
-        dict['h3']=i.find('h3').text
-        dict['span1']=i.find_all('span')[0].text
-        dict['span2']=i.find_all('span')[1].text
-        dict['span3']=i.find_all('span')[2].text
-        dict['span4']=i.find_all('span')[3].text
-        s=i.find_all('div')[1]['style']
-        s=s[22:-2]
-        dict['img']=s
+        try:
+            dict['link']='https://www.lyricsmint.com'+i['href']
+        except:
+            pass
+        try:
+            dict['h3']=i.find('h3').text
+        except:
+            pass
+        try:
+            dict['span1']=i.find_all('span')[0].text
+        except:
+            pass
+        try:
+            dict['span2']=i.find_all('span')[1].text
+        except:
+            pass
+        try:
+            dict['span3']=i.find_all('span')[2].text
+        except:
+            pass
+        try:
+            dict['span4']=i.find_all('span')[3].text
+        except:
+            pass
+        try:
+            s=i.find_all('div')[1]['style']
+            s=s[22:-2]
+            dict['img']=s
+        except:
+            pass
         a.append(dict)
     ex={'4':url+'&page=4','3':url+'&page=3','2':url+'&page=2','1':url}
     return render(request,'artists.html',{'artist':a,'e':ex,'h2':'Search Results','footer':'yes'})
@@ -90,11 +111,29 @@ def collections(request):
     a=[]
     for i in soup.find_all('div',{'class':'flex-no-grow flex-no-shrink w-full h-auto overflow-hidden shadow m-0 mb-5 rounded-xl st-bg-gradient-2'}):
         dict={}
-        dict['h3']=i.find('h3').text
-        dict['span2']=i.find_all('span')[0].text
-        dict['span3']=i.find_all('span')[1].text
-        dict['span4']=i.find_all('span')[2].text
-        dict['img']=i.find('img')['src']
-        dict['link']='https://www.lyricsmint.com'+i.find('a')['href']
+        try:
+            dict['h3']=i.find('h3').text
+        except:
+            pass
+        try:
+            dict['span2']=i.find_all('span')[0].text
+        except:
+            pass
+        try:
+            dict['span3']=i.find_all('span')[1].text
+        except:
+            pass
+        try:
+            dict['span4']=i.find_all('span')[2].text
+        except:
+            pass
+        try:
+            dict['img']=i.find('img')['src']
+        except:
+            pass
+        try:
+            dict['link']='https://www.lyricsmint.com'+i.find('a')['href']
+        except:
+            pass
         a.append(dict)
     return render(request,'artists.html',{'artist':a,'h2':h2})
