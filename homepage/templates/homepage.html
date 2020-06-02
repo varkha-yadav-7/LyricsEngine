@@ -3,38 +3,38 @@
     <head>
         <meta charset="UTF-8">
         <title>Lyrics Search Engine</title>
-        {% load static %}
-        <link rel="stylesheet" type="text/css" href="{%static 'homepage/basic.css'%}">
+        <meta name="viewport" content="width=scrren-size, initial-scale=1.0">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     </head>
-    <body>
-        
-        <div class="container-fluid" style="background-color: teal;color: wheat;">
-            <h1 style="text-align: center;">Search your favorite song lyrics here</h1>
-            <h2>By song name or artist</h2>
-            <p><br></p>
+    <body style="background-color: #e6e6e6;">
+        <div class="jumbotron" style="background-color: rgb(34, 38, 41);width: 100%;height: 90%;text-align: center;" >
+            <h1 style="color: #61892F;">Search your favorite song lyrics here</h1>
+            <h2 style="color: #86C832;">By song name or artist</h2>
+            <p><br><br></p>
+            <form action="/search/" method="POST">{% csrf_token %}
+                <input style="font-size: x-large;" type="text" placeholder="Enter song" name="search" required><br><br>
+                <input class="btn btn-success btn-lg" type="submit" value="Search">
+            </form>
         </div>
-        <p><br></p>
-        <div class="blurry">
-            <p><br></p>
-            <h4 style="color: white;">Search Tracks of your favorite arists</h4>
-            <form action="searchTopTracks/" method="POST">{% csrf_token %}
-                <input style="font-size: larger;" type="text" placeholder="Enter song" name="artist" required>
-                <input style="border: transparent; background-color: black; font-size: larger; color: blanchedalmond;" type="submit" value="Search">
-            </form>
-            <h3 style="color: white;">OR</h3> -->
-           <h4 style="color: white;">Search Artist</h4>
-            <form action="searchArtist/" method="POST">{% csrf_token %}
-                <input style="font-size: larger;" type="text" placeholder="Enter Artist" name="artist" required>
-                <input style="border: transparent; background-color: black; font-size: larger; color: blanchedalmond;" type="submit" value="Search">
-            </form>
-            <h3 style="color: white;">OR</h3>
-            <h4 style="color: white;">Go for the lyrics directly</h4> 
-            <form action="searchSpecificSong/" method="POST">{% csrf_token %}
-                <input style="font-size: larger;" type="text" placeholder="Enter Song" name="song" required>
-                <input style="font-size: larger;" type="text" placeholder="Enter Artist" name="artist" required>
-                <input style="border: transparent; background-color: black; font-size: larger; color: blanchedalmond;" type="submit" value="Search">
-            </form>
+        <div class="container-fluid" style="background-color: #e6e6e6;">
+          <div class="row">
+          {% for i in a %}
+              <div class=" col-sm-4 col-xs-12">
+                <form action="/collections/" method="POST">{% csrf_token %}
+                  <button class="btn btn-link" name="search" value="{{i.link}}">
+                    <div class="card mx-auto" style="padding: 0.5rem;overflow: hidden;margin-bottom:0.5rem;background-color: white;width:auto;height: 22rem;">
+                        <img src="{{i.img}}" style="max-width: 100%;max-height: 100%;"><br>
+                        <div class="card-body">
+                          <span class="card-title">{{i.text}}</span>
+                        </div>
+                    </div>
+                  </button>
+                </form>
+              </div>
+          {% endfor %}
+          </div>
         </div>
     </body>
 </html>

@@ -25,7 +25,7 @@ SECRET_KEY = '_o#%+^bm!(k_42vzb$2&8q_llf9drh@ml0#6z-6dt8ij$##*i%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['lyricsengine.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['lyricsengine.herokuapp.com','127.0.0.1','192.168.43.113']
 
 
 # Application definition

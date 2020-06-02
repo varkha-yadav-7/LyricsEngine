@@ -2,12 +2,53 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=scrren-size, initial-scale=1.0">
         <title>Lyrics Search Engine</title>
-        {% load static %}
-        <link rel="stylesheet" type="text/css" href="{%static 'homepage/basic.css'%}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     </head>
-    <body style="text-align: center; background-color:#fff3e6;">
-        <h1>Result</h1>
-        <h2>{{ i }}</h2>
+    <body style="text-align: center; background-color:#222629;">
+        <style>
+            @media screen and (max-width:768px) {
+                #label{display: none;}
+                #search{width: 50%;}
+            }
+        </style>
+        <div class="container-fluid" style="margin-bottom: 0.5rem;">
+            <form style="padding-top: 1em;position: absolute; right: 0;margin-bottom: 1em;" class="form-inline" action="/search/" method="POST">{% csrf_token %}
+                <input id="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <h3 id="label" style="float: left;color: #61892F;padding-top: 0.2em;">LyricsEngine</h3><br><br>
+        </div>
+        <div class="container"style="margin-top:1em;">
+            <div class="card" style="width: auto; height:auto;background-color: #E6E6E6;text-align: center;">
+                <img style="margin-left: 15%;margin-left: 15%;" src="{{back}}" class="img-responsive" height="70%" width="70%">
+                <div class="card-body" style="background-color: #E6E6E6;">
+                    <div class="row">
+                        <div class="card col-md col-xs-12" style="text-align: left;height: 25rem;margin-right: 0.5rem;margin-bottom: 0.5rem;overflow: scroll;">
+                            <h3 class="card-title">Information</h3>
+                            {% for i in info %}
+                                <span>{{i}}</span><br>
+                            {% endfor %}
+                        </div>
+                        <div class="card col-md col-xs-12" style="overflow: scroll;height: 25rem;margin-right: 0.5rem;margin-bottom: 0.5rem;">
+                            <h3 class="card-title">Lyrics</h3>
+                            {% for i in lyrics %}
+                            <span>{{ i|linebreaks }}</span>
+                            {% endfor %}
+                        </div>
+                        <div class="card col-md col-xs-12" style="text-align: left;height: 25rem;margin-bottom: 0.5rem;overflow: scroll;">
+                            <h3 class="card-title">{{h}}</h3>
+                            {% for i in more %}
+                                <form action="/lyrics/" method="POST">{% csrf_token %}
+                                    <button class="btn btn-link" name="next" value="{{i.link}}">{{i.text}}</button>
+                                </form>
+                            {% endfor %}
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

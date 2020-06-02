@@ -3,16 +3,59 @@
     <head>
         <meta charset="UTF-8">
         <title>Lyrics Search Engine</title>
-        {% load static %}
-        <link rel="stylesheet" type="text/css" href="{%static 'homepage/basic.css'%}">
+        <meta name="viewport" content="width=scrren-size, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     </head>
-    <body style="text-align: center; background-color:#fff3e6;">
-        <h1>Search Results</h1>
-        {% for i in artist %}
-        <form action="searchAlbum/" method="POST">{% csrf_token %}
-            <h3>{{ i.artist.artist_name }}</h3>
-            <button value="{{ i.artist.artist_id }}" name="artist_id">Click here</button>
+    <body style="text-align: center; background-color:#222629;">
+        <style>
+            @media screen and (max-width:768px) {
+                #label{display: none;}
+                #search{width: 50%;}
+            }
+        </style>
+        <form style="padding-top: 1em;position: absolute; right: 0;" class="form-inline" action="/search/" method="POST">{% csrf_token %}
+            <input id="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+            <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
         </form>
-        {% endfor %}
+        <h3 id="label" style="float: left;color: #61892F;padding-top: 0.2em;">LyricsEngine</h3><br><br>
+        <div  class="container-fluid" style="margin-top: 2rem;">
+            <h1 style="color: #61892F;">{{h2}}</h1>
+            <div class="row" style="margin-bottom: 3rem;">
+                {% for i in artist %}
+                <div class="col-md-4 col-sm-6 col-xs-12" style="margin-bottom: 3em;">
+                    <div class="card mx-auto" style="width: auto;background-color: #474B4F;height: 18rem;overflow: hidden;">
+                        <form class="card-body" action="/lyrics/" method="POST">{% csrf_token %}
+                            <div class="row">
+                                <div class="col">
+                                    <img class="img-responsive" src="{{i.img}}" style="max-height: 100%;max-width: 100%;height: initial;"><br>
+                                </div>
+                                <div class="col" style="text-align: left;">
+                                    <h5 style="color: #86C232;" class="card-title">{{ i.h3 }}</h5>
+                                    <h6 style="color: #61892F;" class="card-subtitle">{{ i.span1 }}</h6><br>
+                                    <span style="color:#ACB5AE;">{{ i.span2 }}</span><br>
+                                    <span style="color: #ACB5AE;">{{ i.span3 }}</span><br>
+                                    <span style="color: #ACB5AE;">{{ i.span4 }}</span><br>
+                                </div>
+                                <button class="btn btn-success" style="position: absolute;bottom: 0.5rem;left: 1rem;" value="{{ i.link }}" name="link">View Lyrics</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!--{% if forloop.counter|divisibleby:"3" and not forloop.last %}
+                    </div><div class="row" style="margin-bottom: 3rem;">
+                {% endif %}-->
+                {% endfor %}
+            </div>
+            {% ifequal footer "yes" %}
+            <footer style="margin-bottom: 3rem;">
+                <form action="/search/" method="POST">{% csrf_token %}
+                <button class="btn btn-success" value="{{e.1}}" name="page">1</button>
+                <button class="btn btn-success" value="{{e.2}}" name="page">2</button>
+                <button class="btn btn-success" value="{{e.3}}" name="page">3</button>
+                <button class="btn btn-success" value="{{e.4}}" name="page">4</button>
+                </form>
+            </footer>
+            {% endifequal %}
+        </div>
     </body>
 </html>
