@@ -7,9 +7,20 @@
 It uses BeautifulSoup for web scraping. Data is scraped from www.lyricsmint.com You can view project through this link : https://lyricsengine.herokuapp.com/
 
 
-## Steps to run
 
-After cloning, get inside lyricsengine repository.
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/varkha-yadav-7/LyricsEngine.git
+```
+
+Go to the project directory
+
+```bash
+  cd lyricsengine
+```
 
 Activate the virtual environment through your terminal
 
@@ -17,7 +28,7 @@ Activate the virtual environment through your terminal
   source myvenv/bin/activate
 ```
 
-Run the application :
+Run the application
 
 ```bash
   python manage.py runserver
